@@ -16,6 +16,65 @@
         <p id="user-guess-text"></p>
         <p id="remaining-guesses-text"></p>
     </div>
+    <script type="text/javascript">
+        // Created an array of all the letters that the user can guess.
+            var letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        // Created variables to hold the number of wins, losses and remaining guess.
+            var wins = 0;
+            var losses = 0;
+            var remainingGuesses = 9;
+            var guessesChosen = [];
+        // Created variables that hold references to the places in the HTML of where I want to display things.
+            var directionsText = document.getElementById("directions-text");
+            var winsText = document.getElementById("wins-text");
+            var lossesText = document.getElementById("losses-text");
+            var userGuessText = document.getElementById("user-guess-text");
+            var remainingGuessesText = document.getElementById("remaining-guesses-text");
+        // Randomly chooses a choice from the letters array. This is the Computer's key that it guessed. 
+            var computerGuess = letters[Math.floor(Math.random() * letters.length)];
+            console.log(computerGuess);
+        // When I lift my finger off the key the function runs.
+         
+            
+            document.onkeyup = function (event) {
+         
+        // Determins which key was pressed by the user.
+                var userGuess = event.key;
+                guessesChosen.push(userGuess);
+        // If the user's guess is the same as the computer guess the user gets a win / wins.
+                if (userGuess === computerGuess) {
+                    wins++;
+                    remainingGuesses = 9;
+                    guessesChosen = [];
+                    computerGuess = letters[Math.floor(Math.random() * letters.length)];
+                    console.log(computerGuess);
+        // Alerts the user or player that they have won.
+                    alert("Congratulations! You have guessed the correct letter!")
+                }
+    
+                else if (userGuess !== computerGuess) {
+                    remainingGuesses--;
+                    }
+                    
+                if (remainingGuesses === 0) {
+                        losses ++; 
+                        remainingGuesses = 9;
+                        guessesChosen = [];
+                        alert("Better luck next time!  Guess a letter to start a new game!")
+                    }
+                
+    
+                //Hide the directions
+                directionsText.textContent = "";
+                //Display the user's wins/losses/guess/guesses remaining
+                winsText.textContent = "wins: " + wins;
+                lossesText.textContent = "losses: " + losses;
+                userGuessText.textContent = "You chose: " + guessesChosen;
+                remainingGuessesText.textContent = "Guesses remaining:" + remainingGuesses;
+            }
+    
+    </script>
 </body>
+
 
 </html>
